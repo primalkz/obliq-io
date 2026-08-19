@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --haze: rgba(97, 74, 68, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #fafafa;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer utilities {
+  .marquee {
+    animation: marquee 18s linear infinite;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cloud-float {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-24px);
+  }
+}
+
+@keyframes dot-bounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.rise-in {
+  animation: rise-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cloud-float {
+  animation: cloud-float 9s ease-in-out infinite;
+}
+
+.cloud-float-slow {
+  animation: cloud-float 13s ease-in-out infinite reverse;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-ink px-6 py-3 font-display text-[15px] font-semibold text-white shadow-warm-sm outline-none transition-transform duration-200 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafafa];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-full bg-white/40 px-6 py-3 font-display text-[15px] font-semibold text-ink backdrop-blur outline-none transition-colors hover:bg-white/70 focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafafa];
+  }
+  .card-glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid #e3e1e1;
+    border-radius: 24px;
+    box-shadow: 0px 4px 50px 0px var(--haze);
+  }
+  .footer-glass {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(117, 115, 114, 0.15);
+    border-radius: 32px;
+    box-shadow: 0px 4px 50px 0px var(--haze);
+  }
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-widest text-ink-muted;
+  }
+}
