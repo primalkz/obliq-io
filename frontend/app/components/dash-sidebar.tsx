@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { CalendarBlank, GearSix, SignOut, SquaresFour, Users } from '@phosphor-icons/react'
+import { CalendarBlank, GearSix, ShieldCheck, SignOut, SquaresFour, Users } from '@phosphor-icons/react'
 import { Logo } from './logo'
 import { api } from '../lib'
 
@@ -10,8 +10,8 @@ export default function DashSidebar({
   me,
   active,
 }: {
-  me: { name: string } | null
-  active: 'home' | 'calendar' | 'clients' | 'settings'
+  me: { name: string; role?: string } | null
+  active: 'home' | 'calendar' | 'clients' | 'settings' | 'admin'
 }) {
   const router = useRouter()
 
@@ -49,6 +49,7 @@ export default function DashSidebar({
           {item('calendar', 'Calendar', CalendarBlank)}
           {item('clients', 'Clients', Users)}
           {item('settings', 'Settings', GearSix)}
+          {me?.role === 'ADMIN' && item('admin', 'Admin', ShieldCheck)}
         </nav>
       </div>
       <div className="rounded-container bg-white/70 p-4">

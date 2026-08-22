@@ -9,9 +9,10 @@ import { api } from '../lib'
 import CalendarView from './calendar'
 import ClientsView from './clients'
 import SettingsView from './settings'
+import AdminView from './admin'
 import type { Filing, Client } from './shared'
 
-type Tab = 'home' | 'calendar' | 'clients' | 'settings'
+type Tab = 'home' | 'calendar' | 'clients' | 'settings' | 'admin'
 
 export default function Dashboard() {
   return (
@@ -56,7 +57,7 @@ function DashboardInner() {
       <main className="px-6 pb-20 pt-8 md:pl-[17rem] md:pr-10">
         <div className="mx-auto max-w-4xl space-y-8">
           <div className="flex gap-2 md:hidden">
-            {(['home', 'calendar', 'clients', 'settings'] as const).map((t) => (
+            {(['home', 'calendar', 'clients', 'settings', 'admin'] as const).map((t) => (
               <button
                 key={t}
                 onClick={() => router.push(t === 'home' ? '/dashboard' : `/dashboard?tab=${t}`)}
@@ -77,6 +78,7 @@ function DashboardInner() {
           )}
           {tab === 'clients' && <ClientsView clients={clients} reload={load} />}
           {tab === 'settings' && <SettingsView me={me} setMe={setMe} />}
+          {tab === 'admin' && <AdminView />}
         </div>
       </main>
     </div>
