@@ -11,7 +11,7 @@ export default {
         line: '#e3e1e1',
         accent: { green: '#0ea158', blue: '#156cc2', orange: '#c9502e' },
       },
-      fontFamily: {
+fontFamily: {
         display: ['var(--font-runde)', 'sans-serif'],
         body: ['var(--font-satoshi)', 'sans-serif'],
         mono: ['var(--font-fragment)', 'monospace'],

@@ -65,7 +65,7 @@ export default function ClientDetail() {
 
           {client ? (
             <>
-              <div className="card-glass p-8">
+              <div className="card-glass p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h1 className="font-display text-3xl font-semibold">{client.name}</h1>
@@ -133,7 +133,7 @@ export default function ClientDetail() {
               </section>
             </>
           ) : (
-            <div className="card-glass p-8">
+            <div className="card-glass p-6">
               <div className="h-8 w-48 animate-pulse rounded-full bg-white/70" />
               <div className="mt-6 h-24 animate-pulse rounded-container bg-white/50" />
             </div>

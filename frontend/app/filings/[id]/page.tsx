@@ -70,7 +70,7 @@ export default function FilingDetail() {
           </Link>
 
           {filing ? (
-            <div className="card-glass p-8">
+            <div className="card-glass p-6">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h1 className="font-display text-3xl font-semibold">{filing.title}</h1>
@@ -110,7 +110,7 @@ export default function FilingDetail() {
               </div>
             </div>
           ) : (
-            <div className="card-glass p-8">
+            <div className="card-glass p-6">
               <div className="h-6 w-40 animate-pulse rounded-full bg-white/70" />
               <div className="mt-6 space-y-3">
                 {[1, 2, 3].map((i) => (

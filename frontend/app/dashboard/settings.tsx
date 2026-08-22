@@ -107,7 +107,7 @@ export default function SettingsView({
         <button className="btn-primary px-5 py-2 text-sm">update password</button>
       </form>
 
-      <div className="card-glass p-8">
+      <div className="card-glass p-6">
         <p className="eyebrow mb-3 !text-accent-orange">danger zone</p>
         <p className="text-sm text-ink-body">
           deleting your account wipes every client and filing under it. there is no undo.

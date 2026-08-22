@@ -49,7 +49,7 @@ export default function AuthShell({
           <Link href="/" className="mb-8 block md:hidden">
             <Logo />
           </Link>
-          <div className="card-glass p-8">
+          <div className="card-glass p-6">
             <h1 className="font-display text-2xl font-semibold">{title}</h1>
             <p className="mt-1 text-sm text-ink-body">{sub}</p>
             {children}
