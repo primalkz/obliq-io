@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
+import { InstagramLogo, LinkedinLogo, XLogo } from '@phosphor-icons/react'
 import { Logo } from './logo'
 
 const cols = [
@@ -44,12 +47,17 @@ export default function Footer() {
                 Your favourite compliance ops software. Built for Indian CA firms.
               </p>
               <div className="mt-5 flex gap-3">
-                {['in', 'ig', 'x'].map((s) => (
+                {[
+                  { icon: <LinkedinLogo size={16} weight="fill" />, label: 'linkedin' },
+                  { icon: <InstagramLogo size={16} weight="fill" />, label: 'instagram' },
+                  { icon: <XLogo size={16} weight="fill" />, label: 'x' },
+                ].map((s) => (
                   <span
-                    key={s}
-                    className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-ink font-mono text-[10px] text-white transition-transform hover:-translate-y-0.5"
+                    key={s.label}
+                    className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-ink text-white transition-transform hover:-translate-y-0.5"
+                    aria-label={s.label}
                   >
-                    {s}
+                    {s.icon}
                   </span>
                 ))}
               </div>

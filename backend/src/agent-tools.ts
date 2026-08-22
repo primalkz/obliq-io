@@ -41,11 +41,13 @@ export async function runTool(userId: string, name: string, args: any): Promise<
       include: { client: { select: { name: true } } },
     })
     const rows = all.map((f) => ({
+      id: f.id,
       client: f.client.name,
       filing: f.title,
       period: f.period,
       due: f.dueDate.toISOString().slice(0, 10),
       status: statusOf(f),
+      url: `/filings/${f.id}`,
     }))
     return JSON.stringify(rows.filter((f) => !args.status || f.status === args.status))
   }

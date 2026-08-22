@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import { Inter } from 'next/font/google'
 import './globals.css'
 
 const runde = localFont({
@@ -17,7 +16,14 @@ const fragment = localFont({
   src: './fonts/fragment-mono.woff2',
 })
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const satoshi = localFont({
+  variable: '--font-satoshi',
+  src: [
+    { path: './fonts/Satoshi-Regular.woff2', weight: '400' },
+    { path: './fonts/Satoshi-Medium.woff2', weight: '500' },
+    { path: './fonts/Satoshi-Bold.woff2', weight: '700' },
+  ],
+})
 
 export const metadata: Metadata = {
   title: 'Obliq.io',
@@ -27,7 +33,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${runde.variable} ${inter.variable} ${fragment.variable} font-body text-ink`}>
+      <body className={`${runde.variable} ${satoshi.variable} ${fragment.variable} font-body text-[15px] text-ink`}>
         {children}
       </body>
     </html>

@@ -6,13 +6,22 @@ const MODEL = 'qwen/qwen3.6-27b'
 
 const system = `you are the obliq agent inside a compliance ops dashboard for an indian CA firm.
 today is ${new Date().toISOString().slice(0, 10)}.
-you answer questions about the firm clients, filings and deadlines. use the tools to fetch real
-data before answering, never invent numbers. keep answers short and direct, plain language, no
-greetings. if asked to summarise the week, lead with what is overdue, then what is due next.`
+the dashboard has three tabs: calendar (filings list, each filing has a detail page at
+/filings/{id} with mark filed and delete), clients (client list with gstin and overdue counts)
+and settings.
+you answer questions about the firm clients, filings and deadlines using the tools, never
+invent data. when pointing at a filing, answer with a short sentence plus a markdown link like
+[GSTR-3B - Nandi Logistics](/filings/abc123) using the id from the tool output, so the ui can
+render it clickable. keep answers short and direct, plain language, no greetings.`
 
-export async function askAgent(userId: string, question: string): Promise<string> {
+export async function askAgent(
+  userId: string,
+  question: string,
+  history: { role: 'user' | 'assistant'; content: string }[] = [],
+): Promise<string> {
   const messages: any[] = [
     { role: 'system', content: system },
+    ...history.slice(-6),
     { role: 'user', content: question },
   ]
 

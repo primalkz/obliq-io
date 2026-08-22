@@ -12,10 +12,10 @@ const links = [
 ]
 
 export default function Nav() {
-  const [user, setUser] = useState<{ name: string } | null>(null)
+  const [user, setUser] = useState<{ name: string } | null | 'checking'>('checking')
 
   useEffect(() => {
-    api('/auth/me').then(setUser).catch(() => {})
+    api('/auth/me').then(setUser).catch(() => setUser(null))
   }, [])
 
   return (
@@ -30,7 +30,9 @@ export default function Nav() {
           </a>
         ))}
       </nav>
-      {user ? (
+      {user === 'checking' ? (
+        <span className="h-9 w-28 animate-pulse rounded-full bg-white/60" />
+      ) : user ? (
         <Link href="/dashboard" className="btn-primary px-5 py-2">
           Dashboard
         </Link>

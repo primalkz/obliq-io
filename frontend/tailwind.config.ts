@@ -13,7 +13,7 @@ export default {
       },
       fontFamily: {
         display: ['var(--font-runde)', 'sans-serif'],
-        body: ['var(--font-inter)', 'sans-serif'],
+        body: ['var(--font-satoshi)', 'sans-serif'],
         mono: ['var(--font-fragment)', 'monospace'],
       },
       borderRadius: { card: '24px', container: '20px' },

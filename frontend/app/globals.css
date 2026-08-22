@@ -83,10 +83,10 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-ink px-6 py-3 font-display text-[15px] font-semibold text-white shadow-warm-sm outline-none transition-transform duration-200 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafafa];
+    @apply inline-flex items-center justify-center rounded-full bg-ink px-6 py-3 font-display text-[15px] font-semibold text-white shadow-warm-sm outline-none transition-all duration-200 hover:scale-[1.03] hover:shadow-warm focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafafa] active:scale-[0.98];
   }
   .btn-ghost {
-    @apply inline-flex items-center justify-center rounded-full bg-white/40 px-6 py-3 font-display text-[15px] font-semibold text-ink backdrop-blur outline-none transition-colors hover:bg-white/70 focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafafa];
+    @apply inline-flex items-center justify-center rounded-full bg-white/40 px-6 py-3 font-display text-[15px] font-semibold text-ink outline-none backdrop-blur transition-all duration-200 hover:bg-white/80 hover:shadow-warm-sm focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafafa] active:scale-[0.98];
   }
   .card-glass {
     background: rgba(255, 255, 255, 0.7);

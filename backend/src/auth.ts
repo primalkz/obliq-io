@@ -20,7 +20,12 @@ export function setAuthCookie(res: Response, userId: string) {
 }
 
 export function clearAuthCookie(res: Response) {
-  res.clearCookie(COOKIE)
+  // must mirror the set options or browsers keep the cookie
+  res.clearCookie(COOKIE, {
+    httpOnly: true,
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    secure: process.env.NODE_ENV === 'production',
+  })
 }
 
 // skip cookie-parser and parse the one header we need

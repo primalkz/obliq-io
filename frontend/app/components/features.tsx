@@ -75,23 +75,6 @@ export default function Features() {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
     gsap.registerPlugin(ScrollTrigger)
     const ctx = gsap.context(() => {
-      const panels = gsap.utils.toArray<HTMLElement>('[data-panel]')
-      panels.forEach((panel, i) => {
-        if (i === panels.length - 1) return
-        gsap.to(panel, {
-          scale: 0.92,
-          yPercent: -6,
-          opacity: 0.45,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: panels[i + 1],
-            start: 'top bottom',
-            end: 'top top+=120',
-            scrub: true,
-          },
-        })
-      })
-
       gsap.utils.toArray<HTMLElement>('[data-fade-up]').forEach((el) => {
         gsap.from(el, {
           y: 48,
@@ -100,6 +83,18 @@ export default function Features() {
           ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 85%' },
         })
+      })
+
+      gsap.utils.toArray<HTMLElement>('[data-panel]').forEach((panel, i) => {
+        gsap.fromTo(
+          panel,
+          { y: 40 + i * 10 },
+          {
+            y: -40 - i * 10,
+            ease: 'none',
+            scrollTrigger: { trigger: panel, start: 'top bottom', end: 'bottom top', scrub: true },
+          },
+        )
       })
     }, wrap)
     return () => ctx.revert()
@@ -115,14 +110,17 @@ export default function Features() {
       </div>
       <div className="mt-20 space-y-10 md:space-y-16">
         {rows.map((r, i) => (
-          <div key={r.tag} className="md:sticky md:top-24" data-panel>
+          <div key={r.tag} data-fade-up>
             <div className="grid items-center gap-10 md:grid-cols-2">
               <div className={r.flip ? 'md:order-2' : ''}>
                 <p className="eyebrow mb-3">{r.tag}</p>
                 <h3 className="font-display text-2xl font-semibold md:text-[28px]">{r.title}</h3>
                 <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink-body">{r.body}</p>
               </div>
-              <div className={`rounded-[32px] bg-gradient-to-b from-canvas-horizon to-canvas-deep p-5 md:p-8 ${r.flip ? 'md:order-1' : ''}`}>
+              <div
+                data-panel
+                className={`rounded-[32px] bg-gradient-to-b from-canvas-horizon to-canvas-deep p-5 will-change-transform md:p-8 ${r.flip ? 'md:order-1' : ''}`}
+              >
                 <div className="card-glass p-5 md:p-6">{r.visual}</div>
               </div>
             </div>

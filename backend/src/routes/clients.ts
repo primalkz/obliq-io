@@ -46,6 +46,41 @@ router.post('/', validate(clientSchema), async (req, res, next) => {
   }
 })
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const client = await prisma.client.findUnique({
+      where: { id: req.params.id },
+      include: {
+        filings: { orderBy: { dueDate: 'asc' } },
+      },
+    })
+    if (!client || client.userId !== req.user!.id) throw new AppError(404, 'client not found')
+    const { filings, ...c } = client
+    res.json({ ...c, filings: filings.map((f) => ({ ...f, status: f.filedAt ? 'FILED' : f.dueDate < new Date() ? 'OVERDUE' : 'UPCOMING' })) })
+  } catch (e) {
+    next(e)
+  }
+})
+
+router.patch(
+  '/:id',
+  validate(clientSchema.partial()),
+  async (req, res, next) => {
+    try {
+      const client = await prisma.client.findUnique({ where: { id: req.params.id as string } })
+      if (!client || client.userId !== req.user!.id) throw new AppError(404, 'client not found')
+      const data = {
+        ...(req.body.name ? { name: req.body.name } : {}),
+        ...(req.body.gstin !== undefined ? { gstin: req.body.gstin || null } : {}),
+      }
+      const updated = await prisma.client.update({ where: { id: client.id }, data })
+      res.json(updated)
+    } catch (e) {
+      next(e)
+    }
+  },
+)
+
 router.delete('/:id', async (req, res, next) => {
   try {
     const client = await prisma.client.findUnique({ where: { id: req.params.id as string } })

@@ -47,6 +47,15 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const filing = await ownedFiling(req.user!.id, req.params.id)
+    res.json(withStatus(filing))
+  } catch (e) {
+    next(e)
+  }
+})
+
 router.post('/', validate(filingSchema), async (req, res, next) => {
   try {
     await ownedClient(req.user!.id, req.body.clientId)

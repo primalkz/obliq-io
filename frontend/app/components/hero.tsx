@@ -84,7 +84,11 @@ export default function Hero() {
         </div>
       </div>
 
-      <div ref={card} className="relative mx-auto mt-20 flex justify-center will-change-transform">
+      <div
+        ref={card}
+        className="relative mx-auto mt-20 flex justify-center will-change-transform"
+        style={{ transform: 'perspective(1200px) rotateX(14deg)' }}
+      >
         <DashMock />
       </div>
 
